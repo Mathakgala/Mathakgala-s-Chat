@@ -1,25 +1,33 @@
+// Connect to the server
+const socket = io();
 
-            var chatArea = document.querySelector('.chatArea');
-            var chatInput = document.getElementById('chatInput');
-            var sendButton = document.getElementById('sendButton');
-            sendButton.addEventListener('click', function() {
-                var message = chatInput.value;
-                if (message.trim() !== '') {
-                    var messageElement = document.createElement('div');
-                    messageElement.textContent = message;
-                    chatArea.appendChild(messageElement);
-                    chatInput.value = ''; // Clear the input field
-                }
-            });
-            chatInput.addEventListener('keypress', function(event) {
-                if (event.key === 'Enter') {
-                    sendButton.click(); // Trigger the send button click
-                }
-            });
-            // Simulate receiving messages from the server
-            function receiveMessage(message) {
-                var messageElement = document.createElement('div');
-                messageElement.textContent = message;
-                chatArea.appendChild(messageElement);
-            }
+// Get DOM elements
+const chatArea = document.getElementById('chatArea');
+const chatInput = document.getElementById('chatInput');
+const sendButton = document.getElementById('sendButton');
+
+// Send message to server
+sendButton.addEventListener('click', () => {
+  const message = chatInput.value.trim();
+  if (message !== '') {
+    socket.emit('chat message', message);
+    chatInput.value = '';
+  }
+});
+
+// Optional: send on Enter key
+chatInput.addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+    sendButton.click();
+  }
+});
+
+// Receive message from server
+socket.on('chat message', (msg) => {
+  const messageElement = document.createElement('div');
+  messageElement.textContent = msg;
+  chatArea.appendChild(messageElement);
+  chatArea.scrollTop = chatArea.scrollHeight;
+});
+
             
