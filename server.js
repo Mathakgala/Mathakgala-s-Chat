@@ -11,6 +11,11 @@ app.use(express.json());
 // Serve static files from "public" folder
 app.use(express.static('public'));
 
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/chat.html');
+});
+
+
 // Handle client connections
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
