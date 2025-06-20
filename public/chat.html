@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .chatArea {
+            background-color: azure;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            height: 300px;
+            overflow-y: auto;
+        }
+        input{
+            width: 100%;
+            height: 2em;
+        }
+        .inputArea {
+            display: grid;
+        }
+    </style>
+</head>
+<body>
+    <div class="chatArea">
+
+    </div>
+    <div class="inputArea">
+        <input type="text" id="chatInput" placeholder="Type your message here...">
+        <button id="sendButton">Send</button>
+    </div>
+    <script src="app.js"></script>
+    <script src="server.js"></script>
+</body>
+</html>
